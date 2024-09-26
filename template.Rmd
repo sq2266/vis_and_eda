@@ -104,3 +104,117 @@ weather_df |>
   geom_smooth(method = "lm", se = FALSE)
 
 ```
+
+
+##small things 
+```{r}
+weather_df |>
+  ggplot(aes(x=tmin, y=tmax))+
+  geom_smooth(se = FALSE)
+```
+
+```{r}
+weather_df |>
+   ggplot(aes(x = tmin, y = tmax))+
+   geom_hex()
+```
+
+```{r}
+weather_df |>
+   ggplot(aes(x = tmin, y = tmax, color = "blue"))+
+   geom_point()
+```
+
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, color = name)) +
+  geom_histogram(position = "dodge")
+
+```
+
+
+fixxing it by facet?
+```{r}
+weather_df |>
+  ggplot(aes(x =tmin, fill = name))+
+  geom_histogram()+
+  facet_grid(. ~ name)
+
+```
+
+by density plot?
+```{r}
+weather_df |>
+  ggpplot(aes(x = tmin, fill = name))+
+  geom_density(alpha = .3)
+
+```
+
+
+boxplot
+```{r}
+weather_df |>
+  ggpplot(aes(x = name, y = tmin, fill = name))+
+  geom_boxplot()
+```
+
+violin plots
+```{r}
+weather_df |>
+  ggpplot(aes(x = name, y = tmin, fill = name))+
+  geom_violin()
+
+
+```
+
+
+ridge plot
+```{r}
+weather_df |>
+  ggpplot(aes(x = tmin, y = name))+
+  geom_density_ridges()
+```
+
+
+## learning assessment 2
+```{r}
+weather_df |>
+  ggplot(aes(x = prcp, fill = name)) + 
+  geom_density(alpha = .5) 
+
+weather_df |>
+  ggplot(aes(x = name, y = prcp)) + 
+  geom_boxplot()
+
+weather_df |>
+  filter(prcp >10, prcp <1000) |>
+  ggplot(aes(x = prcp, fill = name)) + 
+  geom_density(alpha = .3)
+```
+
+
+## Saving plots
+```{r}
+weather_df |>
+  ggplot(aes(x= date, y = tmax, color = name))+
+  geom_point()
+
+ggsave("ggp_weather.pdf")
+
+ggp_weather_df |>
+  ggplot(aes(x= date, y = tmax, color = name))+
+  geom_point()
+
+ggsave("ggp_weather.pdf", ggp_weather, width = 8, height = 6)
+```
+
+
+Embedding plots
+```{r,fig.width = 6, fig.asp = .6}
+weather_df |>
+  ggplot(aes(x= date, y = tmax, color = name))+
+  geom_point()
+
+
+```
