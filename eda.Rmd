@@ -73,7 +73,7 @@ weather_df |>
 ```{r}
 weather_df |>
   drop_na(tmax) |>
-  filter()
+  filter(name != "Molokai_HI") |>
   mutate(
     cold = case_when(
       tmax < 5 ~"cold",
@@ -85,6 +85,8 @@ weather_df |>
 
 ```
 
+
+### general numeric summaries
 ```{r}
 
 
