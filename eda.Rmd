@@ -1,5 +1,5 @@
 ---
-title: "vis_and_eda"
+title: "EDA"
 output: html_document
 ---
 ```{r}
@@ -88,16 +88,53 @@ weather_df |>
 
 ### general numeric summaries
 ```{r}
+weather_df |>
+  group_by(name) |>
+  summarise(
+    mean_tmax = mean(tmax,na.rm=TRUE),
+    median_tmin = median(tmin, na.rm = TRUE),
+    sd_prcp = sd(prcp, na.rm = TRUE)
+  )
+
+```
+
+
+###summaries and the plot
+```{r}
+weather_df |>
+  group_by(name) |>
+  summarise(
+    mean_tmax = mean(tmax,na.rm=TRUE),
+    median_tmin = median(tmin, na.rm = TRUE),
+    sd_prcp = sd(prcp, na.rm = TRUE)
+  ) |>
+  ggplot(aes(x = month, y = mean_tmax,color = name))+
+  geom_point()+
+  geom_line()
 
 
 ```
 
 ```{r}
-
+weather_df |>
+  group_by(name) |>
+  summarise(
+    mean_tmax = mean(tmax,na.rm=TRUE)
+  ) |>
+  pivot_wider(
+    names_form = name,
+    values_from = mean_tmax
+  ) |>
+  knitr::kable(
+    digits = 3,
+    col.names = c("Month", "Central Park", "Molokai","Waterhole")
+  )
 
 ```
 
+
 ```{r}
+
 
 
 ```
